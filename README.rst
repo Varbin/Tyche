@@ -123,19 +123,14 @@ other, internal libraries. It's shipped with pyaes to have an own aes library if
 *PyCrypto* will speed up Tyche up to 8 times.
 
 .. note::
-    If using python 2.5 (and maybe 2.6) and older you *have* to install PyCrypto to use Tyche! 
+    pyaes may not work with python 2.5 and older!
 
 Tyche is tested with CPython 3.4, CPython 2.6, CPython 2.7, PyPy 2.4, PyPy3 2.4, Jython 2.7b3 and 
 Jython 2.5.3, all 32-bit. Please note if using Jython, Oracle Java and living outside US, apply the 
 *Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy* 
 to not use the *realy slow* pure python AES library shipped with Tyche.
 
-To use the *Tyche.Test* module, you have to install at least Python 2.7.
- 
-.. note:: 
-    On Windows, Tyche requests administrator access to start *egdw*, an entropy 
-    gathering daemon as administrator. *egdw* adds additional entropy (randomness) to 
-    the generator.
+To use the *Tyche.Test* module, you have to install at least Python 2.7 (or the python 3.x counterpart).
 
 ---
 FAQ
@@ -170,9 +165,9 @@ How can I help to improve Tyche?
 
 Fork the project on Github. Please have backwards compatibility at least to 
 python 2.5 (Jython 2.5.3), if adding something new this does not apply (only the program core 
-hash to run on python 2.5+; additional things (for example Two- or Threefish) does not need 
+has to run with python 2.5+; additional features (for example Two- or Threefish) does not need 
 to work on all python versions). Please also try to not add extra dependencies (this only applies to
-core functionality). 
+core functionalities). 
 
 What it is licensed?
 =======================
