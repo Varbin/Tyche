@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Jython .class files
+*.class
+
 # C extensions
 *.so
 
@@ -32,23 +35,8 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-
-# Translations
-*.mo
-*.pot
-
 # Django stuff:
 *.log
 
 # Sphinx documentation
 docs/_build/
-
-# PyBuilder
-target/
