@@ -5,7 +5,8 @@ Tyche - Fortuna in Python
 Python implementation of the CSPRNG
 (Cryptographic-Secure-Pseudo-Random-Number-Generator)
 Fortuna, designed by Bruce Schneier and Niels Ferguson, build with AES as
-block cipher and SHAd256 as secure hash function.
+block cipher and SHAd256 as secure hash function. In future releases using Two- and Threefish and 
+and sha3 as secure hash will be added.
 
 -----------------------
 Why do I need a CSPRNG?
@@ -25,7 +26,6 @@ to get two (or more) times the same output, PyCrypto's (a python library for cry
 PRNG was not able to handle this correctly for a long time (2.6.0 and older), too.
 
 Mainly on these systems (but not only on them), you need a new, better CSPRNG.
-
 
 
 Tests
@@ -69,6 +69,9 @@ ENT-Test
 |    Arithmetic mean value of data bytes is 127.4906 (127.5 = random).
 |    Monte Carlo value for Pi is 3.142936663 (error 0.04 percent).
 |    Serial correlation coefficient is -0.000507 (totally uncorrelated = 0.0).
+
+
+It passes even the DIEHARD test suite, the log is just too big to add here.
 
 ------------
 Installation
@@ -123,9 +126,9 @@ other, internal libraries. It's shipped with pyaes to have an own aes library if
     If using python 2.5 (and maybe 2.6) and older you *have* to install PyCrypto to use Tyche! 
 
 Tyche is tested with CPython 3.4, CPython 2.6, CPython 2.7, PyPy 2.4, PyPy3 2.4, Jython 2.7b3 and 
-Jython 2.5.3. Please note if using Jython and if using Oracle Java, apply the *Java Cryptography Extension 
-(JCE) Unlimited Strength Jurisdiction Policy* outside the US to use Tyche or use the *realy slow* pure 
-python AES library shipped with Tyche (but this requires at least Jython 2.7).
+Jython 2.5.3, all 32-bit. Please note if using Jython, Oracle Java and living outside US, apply the 
+*Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy* 
+to not use the *realy slow* pure python AES library shipped with Tyche.
 
 To use the *Tyche.Test* module, you have to install at least Python 2.7.
  
@@ -155,7 +158,7 @@ It's so slow!
 =============
 
 This sometimes happens. Currently, the fall-back library (pyaes) is slow (even on PyPy), remember to install 
-PyCrypto.
+PyCrypto (even on PyPy).
 
 Haven't you said above, PyCrypto is insecure?
 =============================================
@@ -165,14 +168,13 @@ I've talked about the PRNG part of PyCrypto, not general PyCrypto. That's a big 
 How can I help to improve Tyche?
 ================================
 
-For example make forks and pull-requests. Please have backwards compatibility at least to 
-python 2.5 (Jython 2.5), if adding something new this does not apply (only the program core 
-hash to run on python 2.5+; additional things (for example twofish) does not need to work on all 
-python versions). Please also try to not add extra dependencies (see rule above). 
+Fork the project on Github. Please have backwards compatibility at least to 
+python 2.5 (Jython 2.5.3), if adding something new this does not apply (only the program core 
+hash to run on python 2.5+; additional things (for example Two- or Threefish) does not need 
+to work on all python versions). Please also try to not add extra dependencies (this only applies to
+core functionality). 
 
-What about the licence?
+What it is licensed?
 =======================
 
-On windows you have to agree to some Microsoft EULA's. All in all, on Windows it licensed as GPL, on other 
-platforms consider MIT. It IS allowed to include a copy of Tyche in your program and remove EGDW on windows 
-platforms to reach an MIT licence.
+GPL v2.0+
