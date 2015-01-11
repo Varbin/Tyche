@@ -1,6 +1,22 @@
+"""
+    Sources/windows.py - Entropy on Windows systems
+    Copyright (C) 2015  Simon Biewald
 
-# Sources/windows.py
-# Entropy on Windows systems
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+"""
+
 
 from __future__ import with_statement
 
@@ -53,6 +69,7 @@ class EGDW(EGD):
         EGD.shutdown(self)
         if self.need_shutdown:
             os.startfile("egdw.exe --close", "runas")
+'''
 try:
     _egdw_service = EGDW()
 except (AssertionError, socket.error, WindowsError):
@@ -61,6 +78,25 @@ else:
     egdw_random = lambda: _egdw_service.gen_random(16)
     egdw_random.__name__ = "<lambda: egdw_random>"
     sources_windows.append(egdw_random)
+'''
+
+try:
+    import winreg
+except ImportError:
+    try:
+        import _winreg as winreg
+    except ImportError:
+        winreq = None
+
+if winreg is not None:
+    from hashlib import sha1
+    def win_internal_states():
+        return sha1(
+            winreg.QueryValueEx(
+                winreg.HKEY_PERFORMANCE_DATA, 'global')[0]
+            ).digest()
+    sources_windows += [win_internal_states]
+
 try:
     import win32api
 except ImportError:

@@ -1,5 +1,24 @@
 #!python
 
+"""
+    setup.py - Setup of Tyche
+    Copyright (C) 2015  Simon Biewald
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+"""
+
 import sys
 import warnings
 import os
@@ -23,14 +42,26 @@ kwargs = dict(
     long_description=open("README.rst").read(),
     author="Simon Biewald",
     author_email="simon.biewald@hotmail.de",
-    license=("GPL (+Microsoft Visual C++ 2007 "
-             "Redistributable License Agreement)"),
+    license=(open('LICENSE').read()),
     zip_safe=False,
     platforms="any",
     packages=['Tyche', 'Tyche.Sources',
               'Tyche.Backends', 'Tyche.Backends.Java',
               'Tyche.Backends.Fallback', 'Tyche.Backends.Fallback.pyaes'],
-    url='https://github.com/Varbin/Tyche',)
+    url='https://github.com/Varbin/Tyche',
+    classifiers=['Topic :: Security :: Cryptography',
+                 'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+                 'Programming Language :: Python :: 2',
+                 'Programming Language :: Python :: 2.5',
+                 'Programming Language :: Python :: 2.6',
+                 'Programming Language :: Python :: 2.7',
+                 'Programming Language :: Python :: 3',
+                 'Programming Language :: Python :: CPython',
+                 'Programming Language :: Python :: Jython',
+                 'Development Status :: 4 - Beta',
+                 'Operating System :: Microsoft :: Windows',
+                 'Operating System :: POSIX',
+                 ])
 
 if float(sys.version[0:3]) < 2.5:
     kwargs['install_requires']=['pycrypto>=2.0']
