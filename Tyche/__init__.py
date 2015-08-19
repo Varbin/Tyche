@@ -10,24 +10,24 @@ Tyche - Fortuna in Python
 Python implementation of the CSPRNG
 (Cryptographic-Secure-Pseudo-Random-Number-Generator)
 Fortuna, designed by Bruce Schneier and Niels Ferguson, build with AES as
-block cipher and SHAd256 as secure hash function. In future releases using Two- and Threefish and 
+block cipher and SHAd256 as secure hash function. In future releases using Two- and Threefish and
 and sha3 as secure hash will be added.
 
 -----------------------
 Why do I need a CSPRNG?
 -----------------------
 
-CSPRNGs are mainly designed to generate securely random data for cryptographic purposes. 
-The output must be unpredictable (it is impossible to compute the next number without having the full 
+CSPRNGs are mainly designed to generate securely random data for cryptographic purposes.
+The output must be unpredictable (it is impossible to compute the next number without having the full
 PRNG state) and it must be impossible to get previously generated output.
 
 
 On many systems, the OS' PRNG isn't secure, mainly on Windows XP and 2000 (and older).
 Also old OpenBSD versions (before October 2013). In Windows XP and 2000 it was possible to
 read 128 KiB of output even before they were computed and 128KiB previous output.
-OpenBSD's arc4random PRNG used the broken stream cipher RC4. 
-OpenSSL doesn't handle correctly forking ('cloning' of the processes) so it was possible 
-to get two (or more) times the same output, PyCrypto's (a python library for cryptographic purposes) 
+OpenBSD's arc4random PRNG used the broken stream cipher RC4.
+OpenSSL doesn't handle correctly forking ('cloning' of the processes) so it was possible
+to get two (or more) times the same output, PyCrypto's (a python library for cryptographic purposes)
 PRNG was not able to handle this correctly for a long time (2.6.0 and older), too.
 
 Mainly on these systems (but not only on them), you need a new, better CSPRNG.
@@ -36,7 +36,7 @@ Mainly on these systems (but not only on them), you need a new, better CSPRNG.
 Tests
 =====
 
-Tyche's Fortuna passes a bunch of randomness tests. On other computers, these tests may fail 
+Tyche's Fortuna passes a bunch of randomness tests. On other computers, these tests may fail
 (it's random, ok?).
 
 FIPS 140-2
@@ -106,43 +106,49 @@ You could also use Fortuna directly, but be sure you now what you do (forking an
     >>> f.reseed(b"secret seed")
     >>> f.pseudoRandomData(8)
     '\xd8w)W!\xe4\x93\xc4'  # py3: b'\xd8w)W!\xe4\x93\xc4'
-    
+
 
 ------------
 Requirements
 ------------
 
-Tyche requires no external module to run, it is based on *hashlib* (shipped with python) and some 
-other, internal libraries. It's shipped with pyaes to have an own aes library if PyCrypto is not found. 
+Tyche requires no external module to run, it is based on *hashlib* (shipped with python) and some
+other, internal libraries. It's shipped with pyaes to have an own aes library if PyCrypto is not found.
 *PyCrypto* will speed up Tyche up to 8 times.
 
 .. note::
-    If using python 2.5 (and maybe 2.6) and older you *have* to install PyCrypto to use Tyche! 
+    If using python 2.5 (and maybe 2.6) and older you *have* to install PyCrypto to use Tyche!
 
-Tyche is tested with CPython 3.4, CPython 2.6, CPython 2.7, PyPy 2.4, PyPy3 2.4, Jython 2.7b3 and 
-Jython 2.5.3, all 32-bit. Please note if using Jython, Oracle Java and living outside US, apply the 
-*Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy* 
+Tyche is tested with CPython 3.4, CPython 2.6, CPython 2.7, PyPy 2.4, PyPy3 2.4, Jython 2.7b3 and
+Jython 2.5.3, all 32-bit. Please note if using Jython, Oracle Java and living outside US, apply the
+*Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy*
 to not use the *realy slow* pure python AES library shipped with Tyche.
 """
 
 
 __licence__ = __license__ = """
     __init__.py - Main functions of Tyche
-    Copyright (C) 2015  Simon Biewald
+    The MIT License (MIT)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+    Copyright (c) 2015 Simon Biewald
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
 """
 
 __all__ = ["Sources", "random", "FortunaGenerator",
